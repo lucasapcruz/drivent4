@@ -1,5 +1,5 @@
 import { prisma } from "@/config";
-import { Booking, Enrollment } from "@prisma/client";
+import { Booking} from "@prisma/client";
 
 async function findByUserId(userId: number) {
   return prisma.booking.findFirst({

@@ -1,5 +1,4 @@
 import { prisma } from "@/config";
-import { Booking, Enrollment } from "@prisma/client";
 
 async function findById(roomId: number) {
   return prisma.room.findFirst({
