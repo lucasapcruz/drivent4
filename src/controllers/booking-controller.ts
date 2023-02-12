@@ -13,6 +13,7 @@ export async function getBookingByUserId(req: AuthenticatedRequest, res: Respons
     return res.status(httpStatus.OK).send(booking);
   } catch (error) {
     if (error.name === "NotFoundError") {
+      console.log(error)
       return res.status(error.status).send(error.message);
     }
     return res.sendStatus(httpStatus.NOT_FOUND);
