@@ -55,7 +55,14 @@ describe("GET /booking", () => {
       expect(response.status).toBe(httpStatus.OK);
       expect(response.body).toEqual({
         id: booking.id,
-        Room: { ...room},
+        Room: {
+          id: room.id,
+          name: room.name,
+          capacity: room.capacity,
+          hotelId: room.hotelId, 
+          updatedAt: room.updatedAt.toISOString(),
+          createdAt: room.createdAt.toISOString()
+        },
       });
     });
   })

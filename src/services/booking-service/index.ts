@@ -16,11 +16,11 @@ async function getOneByUserId(userId: number): Promise<GetOneByUserIdResult> {
   }
 
   return {
-    ...exclude(booking, "userId", "createdAt", "updatedAt"),
+    ...exclude(booking, "roomId", "userId", "createdAt", "updatedAt"),
   };
 }
 
-type GetOneByUserIdResult = Omit<Booking, "userId" | "createdAt" | "updatedAt">;
+type GetOneByUserIdResult = Omit<Booking,  "roomId" | "userId" | "createdAt" | "updatedAt">;
 type CreatedOrUpdatedBooking = Omit<GetOneByUserIdResult, "roomId">;
 
 async function checkRoomIdExistenceAndCapacity(roomId: number) {
