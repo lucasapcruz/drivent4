@@ -240,6 +240,7 @@ describe("POST /booking", () => {
                 const response = await server.post("/booking").set("Authorization", `Bearer ${token}`).send(payload);
 
                 expect(response.status).toEqual(httpStatus.OK);
+                expect(response.body).toEqual({bookingId: expect.any(Number)})
               });
             });
           });
@@ -344,6 +345,7 @@ describe("PUT /booking/:bookingId", () => {
           const response = await server.put(`/booking/${booking1.id}`).set("Authorization", `Bearer ${token}`).send(payload);
 
           expect(response.status).toEqual(httpStatus.OK);
+          expect(response.body).toEqual({bookingId: expect.any(Number)})
         });
       });
     });
