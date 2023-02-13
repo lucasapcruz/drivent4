@@ -3,7 +3,7 @@ import { prisma } from "@/config";
 async function findById(roomId: number) {
   return prisma.room.findFirst({
     where: { id: roomId },
-    select:{
+    select: {
       capacity: true,
       _count: {
         select: {

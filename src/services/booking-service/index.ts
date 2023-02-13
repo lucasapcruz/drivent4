@@ -34,7 +34,6 @@ async function checkRoomIdExistenceAndCapacity(roomId: number) {
 }
 
 async function checkUserTicket(userId: number) {
-
   const enrollment = await enrollmentRepository.findWithAddressByUserId(userId);
 
   if (!enrollment) {
@@ -49,33 +48,31 @@ async function checkUserTicket(userId: number) {
 }
 
 async function createBooking(params: CreateOrUpdateBookingParams): Promise<CreatedOrUpdatedBooking> {
+  await checkUserTicket(params.userId);
 
-  await checkUserTicket(params.userId)
+  await checkRoomIdExistenceAndCapacity(params.roomId);
 
-  await checkRoomIdExistenceAndCapacity(params.roomId)
-
-  const newBooking = await bookingRepository.create(params.userId, params.roomId)
+  const newBooking = await bookingRepository.create(params.userId, params.roomId);
 
   return ({
     id: newBooking.id
-  })
+  });
 }
 
 async function updateBooking(bookingId: number, params: CreateOrUpdateBookingParams): Promise<CreatedOrUpdatedBooking> {
-
-  const booking = await bookingRepository.findById(bookingId)
+  const booking = await bookingRepository.findById(bookingId);
 
   if (!booking || booking.userId !== params.userId) {
     throw forbiddenError();
   }
 
-  await checkRoomIdExistenceAndCapacity(params.roomId)
+  await checkRoomIdExistenceAndCapacity(params.roomId);
 
   const updatedBooking = await bookingRepository.update(bookingId, params.userId, params.roomId);
 
   return ({
     id: bookingId
-  })
+  });
 }
 
 const bookingService = {

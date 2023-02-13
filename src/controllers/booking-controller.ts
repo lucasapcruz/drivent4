@@ -23,9 +23,9 @@ export async function postCreateBooking(req: AuthenticatedRequest, res: Response
   try {
     const { roomId } = req.body;
     const { userId } = req;
-    const booking = await bookingService.createBooking({userId, roomId});
+    const booking = await bookingService.createBooking({ userId, roomId });
 
-    return res.status(httpStatus.OK).send({bookingId: booking.id});
+    return res.status(httpStatus.OK).send({ bookingId: booking.id });
   } catch (error) {
     if (error.name === "Forbidden" || error.name === "OutOfCapacity" || error.name === "NotFoundError") {
       return res.status(error.status).send(error.message);
@@ -38,14 +38,14 @@ export async function putUpdateBooking(req: AuthenticatedRequest, res: Response)
   try {
     const { userId } = req;
     const { bookingId } = req.params;
-    const { roomId } = req.body
+    const { roomId } = req.body;
     const booking = await bookingService.updateBooking(parseInt(bookingId),
       {
         userId,
         roomId
       });
 
-    return res.status(httpStatus.OK).send({bookingId: booking.id});
+    return res.status(httpStatus.OK).send({ bookingId: booking.id });
   } catch (error) {
     if (error.name === "Forbidden" || error.name === "OutOfCapacity" || error.name === "NotFoundError") {
       return res.status(error.status).send(error.message);
