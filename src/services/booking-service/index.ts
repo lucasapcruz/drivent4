@@ -54,7 +54,7 @@ async function createBooking(params: CreateOrUpdateBookingParams): Promise<Creat
 
   await checkRoomIdExistenceAndCapacity(params.roomId)
 
-  const newBooking = await bookingRepository.create(params)
+  const newBooking = await bookingRepository.create(params.userId, params.roomId)
 
   return ({
     id: newBooking.id
@@ -71,7 +71,7 @@ async function updateBooking(bookingId: number, params: CreateOrUpdateBookingPar
 
   await checkRoomIdExistenceAndCapacity(params.roomId)
 
-  const updatedBooking = await bookingRepository.update(bookingId, params);
+  const updatedBooking = await bookingRepository.update(bookingId, params.userId, params.roomId);
 
   return ({
     id: bookingId

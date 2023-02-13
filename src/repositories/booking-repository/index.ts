@@ -1,11 +1,11 @@
 import { prisma } from "@/config";
-import { Booking} from "@prisma/client";
+import { Booking } from "@prisma/client";
 
 async function findByUserId(userId: number) {
   return prisma.booking.findFirst({
     where: { userId },
-    include:{
-      Room:true
+    include: {
+      Room: true
     }
   });
 }
@@ -16,26 +16,26 @@ async function findById(id: number) {
   });
 }
 
-async function create(
-  createdBooking: CreateOrUpdateBookingParams,
-) {
+async function create(userId: number, roomId: number) {
   return prisma.booking.create({
     data: {
-      ...createdBooking
+      userId: userId,
+      roomId: roomId
     }
   });
 }
 
 async function update(
   bookingId: number,
-  createdBooking: CreateOrUpdateBookingParams,
+  userId: number,
+  roomId: number
 ) {
   return prisma.booking.update({
     where: {
       id: bookingId
     },
     data: {
-      ...createdBooking
+      roomId
     }
   });
 }
