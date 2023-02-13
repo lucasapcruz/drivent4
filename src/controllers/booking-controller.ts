@@ -21,9 +21,9 @@ export async function getBookingByUserId(req: AuthenticatedRequest, res: Respons
 
 export async function postCreateBooking(req: AuthenticatedRequest, res: Response) {
   try {
-    await bookingService.createBooking({
-      ...req.body
-    });
+    const { roomId } = req.body;
+    const { userId } = req;
+    await bookingService.createBooking({userId, roomId});
 
     return res.sendStatus(httpStatus.OK);
   } catch (error) {
