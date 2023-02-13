@@ -13,7 +13,6 @@ export async function getBookingByUserId(req: AuthenticatedRequest, res: Respons
     return res.status(httpStatus.OK).send(booking);
   } catch (error) {
     if (error.name === "NotFoundError") {
-      console.log(error)
       return res.status(error.status).send(error.message);
     }
     return res.sendStatus(httpStatus.NOT_FOUND);
@@ -28,6 +27,7 @@ export async function postCreateBooking(req: AuthenticatedRequest, res: Response
 
     return res.sendStatus(httpStatus.OK);
   } catch (error) {
+    console.log(error)
     if (error.name === "Forbidden" || error.name === "OutOfCapacity" || error.name === "NotFoundError") {
       return res.status(error.status).send(error.message);
     }
