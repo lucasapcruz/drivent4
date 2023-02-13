@@ -47,7 +47,6 @@ export async function putUpdateBooking(req: AuthenticatedRequest, res: Response)
 
     return res.sendStatus(httpStatus.OK);
   } catch (error) {
-    console.log(error)
     if (error.name === "Forbidden" || error.name === "OutOfCapacity" || error.name === "NotFoundError") {
       return res.status(error.status).send(error.message);
     }
