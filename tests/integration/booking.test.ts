@@ -239,7 +239,7 @@ describe("POST /booking", () => {
                 const payload = { roomId: room.id }
                 const response = await server.post("/booking").set("Authorization", `Bearer ${token}`).send(payload);
 
-                expect(response.status).toEqual(httpStatus.CREATED);
+                expect(response.status).toEqual(httpStatus.OK);
               });
             });
           });
