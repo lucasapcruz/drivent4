@@ -28,7 +28,7 @@ async function checkRoomIdExistenceAndCapacity(roomId: number) {
   if (!room) {
     throw notFoundError();
   }
-  if (room.capacity < 1) {
+  if (room.capacity <= room._count.Booking) {
     throw outOfCapacityError();
   }
 }
